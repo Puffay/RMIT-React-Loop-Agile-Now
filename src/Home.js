@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import BlogList from './BlogList';
+import Paper from '@mui/material/Paper';
 
 const Home = () => {
 
@@ -16,10 +17,15 @@ const Home = () => {
         setName('Whoever this is');
         setAge(Math.random() * 10);
     }
+    
+    const TourCard = () => {
+        return <Paper elevation={3}> Hello World 123 </Paper>
+    }
 
     return ( 
         <div className="home">
-            <h1>Home</h1>
+            <h1>Welcome to Loop Agile Now</h1>
+            <Paper elevation={3}>HelloWorld123</Paper>
             <BlogList blogs={blogs} title="all blogs" />
             <p>{ name } is { age } years old</p>
             <button onClick={handleClick}>Click me</button>
