@@ -10,7 +10,6 @@ function App() {
       <Navbar />
         <div className="content">
           <Home />
-          <h1>{ title }</h1>
         </div>
     </div>
   );

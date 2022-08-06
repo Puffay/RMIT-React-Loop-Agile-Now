@@ -8,35 +8,25 @@ const Home = () => {
     const [name, setName] = useState('John Doe');
     const [age, setAge] = useState(20);
     const [blogs, setBlogs] = useState([
-        { title: 'React', body: '10', author: 'John Doe', id: 1 },
-        { title: 'Vue', body: '20', author: 'No More', id: 2 },
-        { title: 'Angular', body: '30', author: 'Please Stop', id: 3 }
+        { title: 'Title', body: 'Description', author: 'Username1', id: 1 },
+        { title: 'Title', body: 'Description', author: 'Username2', id: 2 },
+        { title: 'Title', body: 'Description', author: 'Username3', id: 3 },
     ]);
 
     const handleClick = () => {
         setName('Whoever this is');
         setAge(Math.random() * 10);
     }
-    
-    const TourCard = () => {
-        return <Paper elevation={3}> Hello World 123 </Paper>
-    }
 
     return ( 
-        <div className="home">
+        <div>
             <h1>Welcome to Loop Agile Now</h1>
-            <Paper elevation={3}>HelloWorld123</Paper>
-            <BlogList blogs={blogs} title="all blogs" />
-            <p>{ name } is { age } years old</p>
-            <button onClick={handleClick}>Click me</button>
             {blogs.map((blog) => (
                 <div className='blog-preview' key={blog.id}>
-                    <h3>{blog.title}</h3>
-                    <p>{blog.body}</p>
-                    <p>{blog.author}</p>
+                    <Paper><h3>{blog.title}</h3><p>{blog.body}</p><p>{blog.author}</p></Paper>
                 </div>
             ))}
-            {blogs.map(blog => <div key={blog.id}>{blog.title}</div>)}
+           
         </div>
      );
 }
