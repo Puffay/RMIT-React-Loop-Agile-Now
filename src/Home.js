@@ -20,7 +20,7 @@ const Home = () => {
     return ( 
         <div className="home">
             <h1>Home</h1>
-            <BlogList blogs={blogs} />
+            <BlogList blogs={blogs} title="all blogs" />
             <p>{ name } is { age } years old</p>
             <button onClick={handleClick}>Click me</button>
             {blogs.map((blog) => (
