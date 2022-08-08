@@ -35,11 +35,11 @@
 }
 
 /* blog previews and list */
-.blog-preview {
+.userBlog {
   padding: 10px 16px;
   margin: 20px 0;
 }
-.blog-preview h2 {
+.userBlog h3 {
   font-size: 20px;
   color: #f1356d;
   margin-bottom: 8px;

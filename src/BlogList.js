@@ -6,7 +6,7 @@ const BlogList = (props) => {
         <div className="home">
             <h2>{ title }</h2>
             {blogs.map((blog) => (
-                <div className='blog-preview' key={blog.id}>
+                <div className='userBlog' key={blog.id}>
                     <h3>{blog.title}</h3>
                     <p>{blog.body}</p>
                     <p>{blog.author}</p>

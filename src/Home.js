@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import BlogList from './BlogList';
 import Paper from '@mui/material/Paper';
+import Container from '@mui/system/Container';
 
 const Home = () => {
 
-    //let name = 'John Doe';
     const [name, setName] = useState('John Doe');
     const [age, setAge] = useState(20);
     const [blogs, setBlogs] = useState([
@@ -19,15 +19,15 @@ const Home = () => {
     }
 
     return ( 
-        <div>
+        <Container>
             <h1>Welcome to Loop Agile Now</h1>
             {blogs.map((blog) => (
-                <div className='blog-preview' key={blog.id}>
+                <Container className='userBlog' key={blog.id}>
                     <Paper><h3>{blog.title}</h3><p>{blog.body}</p><p>{blog.author}</p></Paper>
-                </div>
+                </Container>
             ))}
            
-        </div>
+        </Container>
      );
 }
  
