@@ -3,6 +3,7 @@ import BlogList from './BlogList';
 import Paper from '@mui/material/Paper';
 import Container from '@mui/system/Container';
 import Box from '@mui/material/Box';
+import { Typography } from '@mui/material';
 
 const Home = () => {
 
@@ -21,10 +22,22 @@ const Home = () => {
 
     return ( 
         <Container>
-            <h1>Welcome to Loop Agile Now</h1>
+            <Typography component='h1'variant='h7'>
+                Welcome to Loop Agile Now
+            </Typography>
             {blogs.map((blog) => (
                 <Container className='userBlog' key={blog.id}>
-                    <Paper><h3>{blog.title}</h3><p>{blog.body}</p><p>{blog.author}</p></Paper>
+                    <Paper>
+                        <Typography component='h3' variant='h3'>
+                        {blog.title}
+                        </Typography>
+                        <Typography component='p' variant='p'>
+                        {blog.body}
+                        </Typography>
+                        <Typography component='p' variant='p'>
+                        {blog.author}
+                        </Typography>
+                    </Paper>
                 </Container>
             ))}
            
