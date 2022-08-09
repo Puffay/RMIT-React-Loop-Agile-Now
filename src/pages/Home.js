@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import BlogList from './BlogList';
+import BlogList from '../BlogList';
 import Paper from '@mui/material/Paper';
 import Container from '@mui/system/Container';
 import Box from '@mui/material/Box';
@@ -20,29 +20,29 @@ const Home = () => {
         setAge(Math.random() * 10);
     }
 
-    return ( 
+    return (
         <Container>
-            <Typography component='h1'variant='h7'>
+            <Typography component='h1' variant='h7'>
                 Welcome to Loop Agile Now
             </Typography>
             {blogs.map((blog) => (
                 <Container className='userBlog' key={blog.id}>
                     <Paper>
                         <Typography component='h3' variant='h3'>
-                        {blog.title}
+                            {blog.title}
                         </Typography>
                         <Typography component='p' variant='p'>
-                        {blog.body}
+                            {blog.body}
                         </Typography>
                         <Typography component='p' variant='p'>
-                        {blog.author}
+                            {blog.author}
                         </Typography>
                     </Paper>
                 </Container>
             ))}
-           
+
         </Container>
-     );
+    );
 }
- 
+
 export default Home;

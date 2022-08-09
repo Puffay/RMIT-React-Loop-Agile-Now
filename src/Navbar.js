@@ -1,11 +1,16 @@
+import { Link } from 'react-router-dom';
+import Paper from '@mui/material/Paper';
+import Container from '@mui/system/Container';
+import Box from '@mui/material/Box';
+
 const Navbar = () => {
     return ( 
         <nav className="navbar">
             <h1>Loop Agile Now</h1>
-            <div className="links">
-                <a href="/">Login</a>
-                <a href="/signup">Sign Up</a>
-            </div>
+            <Box className="links">
+                <Link to="/">Login</Link>
+                <Link to="/signup">Sign Up</Link>
+            </Box>
         </nav>
     );
 }
