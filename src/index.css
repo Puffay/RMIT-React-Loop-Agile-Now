@@ -30,14 +30,3 @@ body{
   margin: 40px auto;
   padding: 20px;
 }
-
-/* blog previews and list */
-.userBlog {
-  padding: 10px 16px;
-  margin: 20px 0;
-}
-.userBlog h3 {
-  font-size: 20px;
-  color: #f1356d;
-  margin-bottom: 8px;
-}

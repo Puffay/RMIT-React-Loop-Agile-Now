@@ -3,22 +3,16 @@ import BlogList from '../BlogList';
 import Paper from '@mui/material/Paper';
 import Container from '@mui/system/Container';
 import Box from '@mui/material/Box';
-import { Typography } from '@mui/material';
+import { createTheme, Typography } from '@mui/material';
+import { Margin } from '@mui/icons-material';
 
 const Home = () => {
-
     const [name, setName] = useState('John Doe');
-    const [age, setAge] = useState(20);
     const [blogs, setBlogs] = useState([
         { title: 'Title', body: 'Description', author: 'Username1', id: 1 },
         { title: 'Title', body: 'Description', author: 'Username2', id: 2 },
         { title: 'Title', body: 'Description', author: 'Username3', id: 3 },
     ]);
-
-    const handleClick = () => {
-        setName('Whoever this is');
-        setAge(Math.random() * 10);
-    }
 
     return (
         <Container>
@@ -26,9 +20,13 @@ const Home = () => {
                 Welcome to Loop Agile Now
             </Typography>
             {blogs.map((blog) => (
-                <Container className='userBlog' key={blog.id}>
+                <Container key={blog.id} sx={{
+                    px: '10px',
+                    py: '16px',
+                    mx: '20px',
+                }}>
                     <Paper>
-                        <Typography component='h3' variant='h3'>
+                        <Typography component='h3' variant='h3' sx={{color: 'red', mb: '8px'}}>
                             {blog.title}
                         </Typography>
                         <Typography component='p' variant='p'>
@@ -40,9 +38,9 @@ const Home = () => {
                     </Paper>
                 </Container>
             ))}
-
         </Container>
     );
 }
+
 
 export default Home;
