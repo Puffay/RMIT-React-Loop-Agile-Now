@@ -8,7 +8,7 @@ const Navbar = () => {
         <nav className="navbar">
             <h1>Loop Agile Now</h1>
             <Box className="links">
-                <Link to="/">Login</Link>
+                <Link to="/login">Login</Link>
                 <Link to="/signup">Sign Up</Link>
             </Box>
         </nav>
