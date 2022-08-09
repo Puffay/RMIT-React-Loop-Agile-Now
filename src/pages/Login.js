@@ -4,36 +4,36 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import { Container } from '@mui/material';
 
 
 const Login = () => {
+    const loginfunc = (e) => {
+        e.preventDefault();
+        console.log('login');
+    }
     return (
-            <Box sx={{ width: 100, height: 100, backgroundColor: 'primary.dark', left: '40%'}}>
-                <Typography>
-                    <Box sx={{ textAlign: 'center', m: 1, fontWeight: 'bold', m: 1 }}>
-                        Please fill in the required information to login
-                    </Box>
-                    <Box sx={{ '& .MuiTextField-root': { m: 2, width: '25', left: '40%' }, }} >
-                        <div>
-                            <TextField
-                                required
-                                id="outlined-Username"
-                                label="Username"
-                            />
-                        </div>
-                        <div>
-                            <TextField
-                                required
-                                id="outlined-Password"
-                                label="Password"
-                            />
-                        </div>
-                        <div>
-                            <Button variant="outlined">Login</Button>
-                        </div>
-                    </Box>
+        <Container component='main' maxWidth='xs'>
+            <Paper sx={{
+                m: 3,
+                p: 3,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+            }}>
+                <Typography component='h1' variant='h5'>
+                    Login
                 </Typography>
-            </Box >
+                <Box component='form' onSubmit={loginfunc}>
+                    <TextField name='email' type='text' label='Email' fullWidth margin='normal'/>
+                    <TextField name='password' type='password' label='Password' fullWidth margin='normal'/>
+                    <Button type='submit' fullWidth variant='contained' color='primary' sx={{my: 2}}>
+                        Login
+                    </Button>
+                </Box>
+            </Paper>
+        </Container>
+
     );
 }
 
