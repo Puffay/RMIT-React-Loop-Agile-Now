@@ -7,23 +7,27 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, Router } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-
-    const nav = useNavigate();
-
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        <Link to='/' style={{ textDecoration: 'none', color: 'Red' }}>
+                        <Link to='/' style={{ textDecoration: 'none', color: '#96001a'}}>
                             Loop Agile Now
                         </Link>
                     </Typography>
-                    <Button color="inherit" onClick={(e) => nav('/login')}>Login</Button>
-                    <Button color="inherit" onClick={(e) => nav('/signup')}>Sign Up</Button>
+                    <Button color="inherit" >
+                        <Link to="/login" style={{ textDecoration: 'none', color: 'White' }}>
+                            Login
+                        </Link>
+                    </Button>
+                    <Button color="inherit">
+                        <Link to="/signup" style={{ textDecoration: 'none', color: 'White' }}>
+                            Sign Up
+                        </Link>
+                    </Button>
                 </Toolbar>
             </AppBar>
         </Box>
