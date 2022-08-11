@@ -16,7 +16,7 @@ const Home = () => {
 
     return (
         <Container>
-            <Typography component='h1' variant='h7'>
+            <Typography component='h1' variant='h7' align='center'>
                 Welcome to Loop Agile Now
             </Typography>
             {blogs.map((blog) => (
@@ -26,7 +26,7 @@ const Home = () => {
                     mx: '20px',
                 }}>
                     <Paper>
-                        <Typography component='h3' variant='h3' sx={{color: 'red', mb: '8px'}}>
+                        <Typography component='h3' variant='h3' sx={{color: 'red', mb: '8px', fontSize: 25}}>
                             {blog.title}
                         </Typography>
                         <Typography component='p' variant='p'>
