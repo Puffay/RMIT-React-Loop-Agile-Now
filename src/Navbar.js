@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, Router } from 'react-router-dom';
+import { fontWeight } from '@mui/system';
 
 const Navbar = () => {
     return (
@@ -14,7 +15,7 @@ const Navbar = () => {
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        <Link to='/' style={{ textDecoration: 'none', color: '#96001a'}}>
+                        <Link to='/' style={{ textDecoration: 'none', color: 'White', fontWeight:'Bold'}}>
                             Loop Agile Now
                         </Link>
                     </Typography>
