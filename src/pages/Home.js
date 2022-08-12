@@ -25,6 +25,9 @@ const Home = () => {
                     py: '16px',
                     mx: '20px',
                 }}>
+                    <Typography component='h1' variant='h7' align='left'>
+                        These are post from other users
+                    </Typography>
                     <Paper>
                         <Typography component='h3' variant='h3' sx={{color: 'red', mb: '8px', fontSize: 25}}>
                             {blog.title}
