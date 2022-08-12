@@ -8,10 +8,29 @@ import { Container } from '@mui/material';
 
 
 const Signup = () => {
+
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+
     const signupfunc = (e) => {
         e.preventDefault();
+        localStorage.setItem('email', email);
+        localStorage.setItem('password', password);
         console.log('Signup');
     }
+
+    function onChangeEmail(e) {
+        setEmail(e.target.value)
+    }
+    function onChangePassword(e) {
+        setPassword(e.target.value)
+    }
+
+    function getData() {
+        console.log(localStorage.getItem('email'));
+        console.log(localStorage.getItem('password'))
+    }
+
     return (
         <Container component='main' maxWidth='xs'>
             <Paper sx={{
@@ -25,8 +44,8 @@ const Signup = () => {
                     Sign Up
                 </Typography>
                 <Box component='form' onSubmit={signupfunc}>
-                    <TextField name='email' type='text' label='Email' fullWidth margin='normal'/>
-                    <TextField name='password' type='password' label='Password' fullWidth margin='normal'/>
+                    <TextField name='email' type='text' label='Email' fullWidth margin='normal' onChange={onChangeEmail}/>
+                    <TextField name='password' type='password' label='Password' fullWidth margin='normal' onChange={onChangePassword}/>
                     <Button type='submit' fullWidth variant='contained' color='primary' sx={{my: 2}}>
                         Register
                     </Button>
