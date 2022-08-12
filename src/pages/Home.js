@@ -19,17 +19,19 @@ const Home = () => {
             <Typography component='h1' variant='h7' align='center'>
                 Welcome to Loop Agile Now
             </Typography>
+            <Container>
+                <Typography component='h1' variant='h7' align='left' fontSize={24}>
+                    Post from other users
+                </Typography>
+            </Container>
             {blogs.map((blog) => (
                 <Container key={blog.id} sx={{
                     px: '10px',
                     py: '16px',
                     mx: '20px',
                 }}>
-                    <Typography component='h1' variant='h7' align='left'>
-                        These are post from other users
-                    </Typography>
                     <Paper>
-                        <Typography component='h3' variant='h3' sx={{color: 'red', mb: '8px', fontSize: 25}}>
+                        <Typography component='h3' variant='h3' sx={{ color: 'red', mb: '8px', fontSize: 25 }}>
                             {blog.title}
                         </Typography>
                         <Typography component='p' variant='p'>
