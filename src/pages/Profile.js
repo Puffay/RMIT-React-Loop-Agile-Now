@@ -1,14 +1,12 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import BlogList from '../BlogList';
 import Paper from '@mui/material/Paper';
 import Container from '@mui/system/Container';
 import Box from '@mui/material/Box';
 import { createTheme, Typography } from '@mui/material';
 import { Margin } from '@mui/icons-material';
-import { userContext } from '../App';
 
-const Forum = () => {
-    const [user, setUser] = useContext(userContext);
+const Profile = () => {
     const [name, setName] = useState('John Doe');
     const [blogs, setBlogs] = useState([
         { title: 'Title', body: 'Description', author: 'Username1', id: 1 },
@@ -19,7 +17,7 @@ const Forum = () => {
     return (
         <Container>
             <Typography component='h1' variant='h7' align='center'>
-                Welcome {user.name}
+                Welcome ...username...
             </Typography>
             <Container>
                 <Typography component='h1' variant='h7' align='left' fontSize={24}>
@@ -50,4 +48,4 @@ const Forum = () => {
 }
 
 
-export default Forum;
+export default Profile;

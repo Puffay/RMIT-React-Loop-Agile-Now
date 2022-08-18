@@ -6,10 +6,14 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link, Router } from 'react-router-dom';
+import { Link, Navigate, Router, useNavigate } from 'react-router-dom';
 import { fontWeight } from '@mui/system';
+import { userContext } from './App';
+import { removeUser } from './data/database';
 
-function Navbar(props) {
+function Navbar() {
+    const [user, setUser] = React.useContext(userContext);
+    const navigate = useNavigate();
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -19,37 +23,27 @@ function Navbar(props) {
                             Loop Agile Now
                         </Link>
                     </Typography>
-                    {props.username == null ?
-                        (<Button color="inherit" sx={{ ml: 'auto' }} >
-                            <Link to="/login" style={{ textDecoration: 'none', color: 'White' }} >
-                                Login
-                            </Link>
+                    {user === null ?
+                        (<Button color="inherit" sx={{ ml: 'auto' }} onClick={(e) => navigate('/login')} >
+                            Login
                         </Button>)
                         :
-                        (<Button color="inherit" sx={{ ml: '30px' }} >
-                            <Link to="/profile" style={{ textDecoration: 'none', color: 'White' }}>
-                                Profile
-                            </Link>
+                        (<Button color="inherit" sx={{ ml: '30px' }} onClick={(e) => navigate('/profile')} >
+                            Profile
                         </Button>)
                     }
-                    {props.username != null &&
-                        (<Button color="inherit" >
-                            <Link to="/forum" style={{ textDecoration: 'none', color: 'White' }} >
-                                Forum
-                            </Link>
+                    {user !== null &&
+                        (<Button color="inherit" onClick={(e) => navigate('/forum')}>
+                            Forum
                         </Button>)
                     }
-                    {props.username == null ?
-                        (<Button color="inherit" >
-                            <Link to="/signup" style={{ textDecoration: 'none', color: 'White' }}>
-                                Sign Up
-                            </Link>
+                    {user === null ?
+                        (<Button color="inherit" onClick={(e) => navigate('/signup')} >
+                            Signup
                         </Button>)
                         :
-                        (<Button color="inherit" sx={{ ml: 'auto' }}>
-                            <Link to="/logout" style={{ textDecoration: 'none', color: 'White' }}>
-                                Logout
-                            </Link>
+                        (<Button color="inherit" sx={{ ml: 'auto' }} onClick={(e) => {removeUser(); setUser(null); navigate('/');}}>
+                            Logout
                         </Button>)
                     }
                 </Toolbar>

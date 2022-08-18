@@ -5,17 +5,18 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
+import { addUser } from '../data/database';
 
 
 const Signup = () => {
 
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [name, setName] = React.useState('');
 
     const signupfunc = (e) => {
         e.preventDefault();
-        localStorage.setItem('email', email);
-        localStorage.setItem('password', password);
+        addUser(email, name, password);
         console.log('Signup');
     }
 
@@ -25,10 +26,8 @@ const Signup = () => {
     function onChangePassword(e) {
         setPassword(e.target.value)
     }
-
-    function getData() {
-        console.log(localStorage.getItem('email'));
-        console.log(localStorage.getItem('password'))
+    function onChangeName(e) {
+        setName(e.target.value)
     }
 
     return (
@@ -45,6 +44,7 @@ const Signup = () => {
                 </Typography>
                 <Box component='form' onSubmit={signupfunc}>
                     <TextField name='email' type='text' label='Email' fullWidth margin='normal' onChange={onChangeEmail}/>
+                    <TextField name='name' label='Name' fullWidth margin='normal' onChange={onChangeName}/>
                     <TextField name='password' type='password' label='Password' fullWidth margin='normal' onChange={onChangePassword}/>
                     <Button type='submit' fullWidth variant='contained' color='primary' sx={{my: 2}}>
                         Register
