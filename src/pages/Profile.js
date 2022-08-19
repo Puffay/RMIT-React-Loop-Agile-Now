@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import BlogList from '../BlogList';
-import Paper from '@mui/material/Paper';
 import Container from '@mui/system/Container';
-import Box from '@mui/material/Box';
 import { createTheme, Typography } from '@mui/material';
-import { Margin } from '@mui/icons-material';
+import Avatar from '@mui/material/Avatar';
+import { deepOrange, deepPurple } from '@mui/material/colors';
+import TextField from '@mui/material/TextField';
 
 const Profile = () => {
     const [name, setName] = useState('John Doe');
@@ -20,29 +19,16 @@ const Profile = () => {
                 Welcome ...username...
             </Typography>
             <Container>
-                <Typography component='h1' variant='h7' align='left' fontSize={24}>
-                    Post from other users
-                </Typography>
+                <Avatar align="centre" sx={{ bgcolor: deepPurple[500], width: 200, height: 200 }}>
+                    <Typography variant="h3">
+                        NAME
+                    </Typography>
+                </Avatar>
             </Container>
-            {blogs.map((blog) => (
-                <Container key={blog.id} sx={{
-                    px: '10px',
-                    py: '16px',
-                    mx: '20px',
-                }}>
-                    <Paper>
-                        <Typography component='h3' variant='h3' sx={{ color: 'red', mb: '8px', fontSize: 25 }}>
-                            {blog.title}
-                        </Typography>
-                        <Typography component='p' variant='p'>
-                            {blog.body}
-                        </Typography>
-                        <Typography component='p' variant='p'>
-                            {blog.author}
-                        </Typography>
-                    </Paper>
-                </Container>
-            ))}
+            <Container>
+                <TextField name='name' type='text' label='Name' defaultValue="...name..." />
+                <TextField name='email' type='text' label='Email'defaultValue="...email..."/>
+            </Container>
         </Container>
     );
 }
