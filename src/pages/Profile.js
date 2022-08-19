@@ -4,6 +4,8 @@ import { createTheme, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import { deepOrange, deepPurple } from '@mui/material/colors';
 import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
 
 const Profile = () => {
     const [name, setName] = useState('John Doe');
@@ -18,18 +20,20 @@ const Profile = () => {
             <Typography component='h1' variant='h7' align='center'>
                 Welcome ...username...
             </Typography>
-            <Container>
-                <Avatar align="centre" sx={{ bgcolor: deepPurple[500], width: 200, height: 200 }}>
-                    <Typography variant="h3">
-                        NAME
-                    </Typography>
-                </Avatar>
-            </Container>
-            <Container>
-                <TextField name='name' type='text' label='Name' defaultValue="...name..." />
-                <TextField name='email' type='text' label='Email'defaultValue="...email..."/>
-            </Container>
-        </Container>
+            <Box sx={{  border: 1, borderRadius: '16px', borderColor: 'white', boxShadow: 20, width: 600, height: 300, backgroundColor: 'primary.dark' }}>
+                <Container>
+                    <Avatar align="centre" sx={{ bgcolor: deepPurple[500], width: 200, height: 200 }}>
+                        <Typography variant="h3">
+                            NAME
+                        </Typography>
+                    </Avatar>
+                </Container>
+                <Container>
+                    <TextField name='name' type='text' label='Name' defaultValue="...name..." />
+                    <TextField name='email' type='text' label='Email' defaultValue="...email..." />
+                </Container>
+            </Box>
+        </Container >
     );
 }
 
