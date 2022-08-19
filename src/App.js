@@ -5,6 +5,7 @@ import SignUp from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Forum from './pages/Forum';
+import Signupverify from './pages/Signupverify';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { initUsers } from './data/database';
@@ -34,6 +35,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/forum" element={<Forum />} />
+              <Route path="/signupverify" element={<Signupverify />} />
             </Routes>
           </div>
         </BrowserRouter>

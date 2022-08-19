@@ -28,7 +28,7 @@ const Signup = () => {
         } else {
             addUser(email, name, password);
             alert('You have successfully created an account'); //delete this after re route
-            navigate('/login'); //replace with route to login page
+            navigate('/signupverify'); //replace with route to login page
         }
         
         console.log('Signup');
