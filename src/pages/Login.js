@@ -9,7 +9,6 @@ import { getUser, verifyUser } from '../data/database';
 import { useNavigate } from "react-router-dom";
 import { userContext } from '../App';
 
-//Insert the logging stuff so that it works
 const Login = () => {
     const navigate = useNavigate();
     const [error, setError] = React.useState('none');

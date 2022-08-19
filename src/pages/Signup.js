@@ -5,18 +5,34 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
-import { addUser } from '../data/database';
+import { addUser, existUser } from '../data/database';
+import { useNavigate } from 'react-router-dom';
 
+// !!DONE!! Make a check for register so that the user must input something or else error
+// !!DONE!! After user creates account changes page to confirm user made account
+// Make it so that email need to be email format
 
 const Signup = () => {
 
+    const navigate = useNavigate();
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [name, setName] = React.useState('');
+    const [error, setError] = React.useState('none');
 
     const signupfunc = (e) => {
         e.preventDefault();
-        addUser(email, name, password);
+
+        if (email === '' || password === '' || name === '') { // Check if all fields are filled out
+            setError('Please fill out all fields');
+        } else if (existUser(email, name, password)) { //should check to see if user already exists
+            setError('Account already exist');
+        } else {
+            addUser(email, name, password);
+            alert('You have successfully created an account'); //delete this after re route
+            navigate('/login'); //replace with route to login page
+        }
+        
         console.log('Signup');
     }
 
@@ -43,9 +59,10 @@ const Signup = () => {
                     Sign Up
                 </Typography>
                 <Box component='form' onSubmit={signupfunc}>
-                    <TextField name='email' type='text' label='Email' fullWidth margin='normal' onChange={onChangeEmail}/>
-                    <TextField name='name' label='Name' fullWidth margin='normal' onChange={onChangeName}/>
-                    <TextField name='password' type='password' label='Password' fullWidth margin='normal' onChange={onChangePassword}/>
+                    <TextField name='email' type='text' label='Email' fullWidth margin='normal' onChange={onChangeEmail} error={error !== 'none'} />
+                    <TextField name='name' label='Name' fullWidth margin='normal' onChange={onChangeName} error={error !== 'none'} />
+                    <TextField name='password' type='password' label='Password' fullWidth margin='normal' onChange={onChangePassword} error={error !== 'none'} />
+                    <Typography color='error' sx={{visibility: error === 'none' ? 'hidden' : 'visible'}} >{error}</Typography>
                     <Button type='submit' fullWidth variant='contained' color='primary' sx={{my: 2}}>
                         Register
                     </Button>

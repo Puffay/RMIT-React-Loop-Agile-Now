@@ -49,6 +49,16 @@ function verifyUser(email, password) {
   return false;
 }
 
+function existUser(email, name, password) {
+  const users = getUsers();
+  for(const user of users) {
+    if(email === user.email && name === user.name && password === user.password)
+      return true;
+  }
+
+  return false;
+}
+
 function setUser(user) {
   localStorage.setItem(USER_KEY, JSON.stringify(user));
 }
@@ -76,5 +86,6 @@ export {
   verifyUser,
   getUser,
   removeUser,
-  addUser
+  addUser,
+  existUser
 }
