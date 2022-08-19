@@ -8,8 +8,6 @@ import { Container } from '@mui/material';
 import { addUser, existUser } from '../data/database';
 import { useNavigate } from 'react-router-dom';
 
-// !!DONE!! Make a check for register so that the user must input something or else error
-// !!DONE!! After user creates account changes page to confirm user made account
 // Make it so that email need to be email format
 
 const Signup = () => {
