@@ -35,20 +35,18 @@ const Forum = () => {
             <Typography component='h1' variant='h7' align='center'>
                 Welcome {user.name}
             </Typography>
-            <Box onSubmit={postForum}>
-                <Typography align='center' >
-                    <TextField
-                        id="post"
-                        label="New post"
-                        multiline
-                        rows={4}
-                        margin="normal"
-                        fullWidth='true'
-                        defaultValue="Write a post"
-                    />
-                </Typography>
+            <Box onSubmit={postForum} align='center' >
+                <TextField
+                    id="post"
+                    label="New post"
+                    multiline
+                    rows={4}
+                    margin="normal"
+                    fullWidth
+                    defaultValue="Write a post"
+                />
                 <Stack direction="row" spacing={2} sx={{ mb: 4, mt: 1 }}>
-                    <Button variant="outlined" color="error" onClick={() => {setEmpty('');}}>
+                    <Button variant="outlined" color="error" onClick={() => { setEmpty(''); }}>
                         Delete
                     </Button>
                     <Button variant="contained" color="success">

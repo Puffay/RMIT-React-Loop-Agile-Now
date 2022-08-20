@@ -49,10 +49,10 @@ function verifyUser(email, password) {
   return false;
 }
 
-function existUser(email, name, password) {
+function existUser(email) {
   const users = getUsers();
   for(const user of users) {
-    if(email === user.email && name === user.name && password === user.password)
+    if(email === user.email)
       return true;
   }
 

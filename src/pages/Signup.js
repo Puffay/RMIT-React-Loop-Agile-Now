@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
-import { addUser, existUser, getUser } from '../data/database';
+import { addUser, existUser, getUser, verifyUser } from '../data/database';
 import { useNavigate } from 'react-router-dom';
 import { userContext } from '../App';
 
@@ -26,12 +26,12 @@ const Signup = () => {
 
         if (email === '' || password === '' || name === '') { // Check if all fields are filled out
             setError('Please fill out all fields');
-        } else if (existUser(email, name, password)) { //should check to see if user already exists
+        } else if (existUser(email)) { //should check to see if user already exists
             setError('Account already exist');
         } else {
             addUser(email, name, password);
-            setUser(); // fix this so that when user registers they are logged in
-            navigate('/signupverify'); //replace with route to login page
+            setUser(verifyUser(email, password)); // when user registers they are logged in
+            navigate('/signupverify');
         }
         
         console.log('Signup');
