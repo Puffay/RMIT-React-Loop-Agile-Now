@@ -9,8 +9,7 @@ import { addUser, existUser, getUser, verifyUser } from '../data/database';
 import { useNavigate } from 'react-router-dom';
 import { userContext } from '../App';
 
-// make it so that accounts cannot overlap
-// user registering should auto login
+// password should be "Strong"
 
 const Signup = () => {
 
