@@ -41,7 +41,7 @@ const Login = () => {
                     Login
                 </Typography>
                 <Box component='form' onSubmit={loginfunc}> 
-                    <TextField name='email' type='text' label='Email' fullWidth margin='normal' error={error !== 'none'} />
+                    <TextField name='email' type='email' label='Email' fullWidth margin='normal' error={error !== 'none'} />
                     <TextField name='password' type='password' label='Password' fullWidth margin='normal' error={error !== 'none'} />
                     <Typography color='error' sx={{visibility: error === 'none' ? 'hidden' : 'visible'}} >{error}</Typography>
                     <Button type='submit' fullWidth variant='contained' color='primary' sx={{my: 2}}>

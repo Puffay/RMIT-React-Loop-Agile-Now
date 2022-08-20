@@ -5,10 +5,12 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
-import { addUser, existUser } from '../data/database';
+import { addUser, existUser, getUser } from '../data/database';
 import { useNavigate } from 'react-router-dom';
+import { userContext } from '../App';
 
-// Make it so that email need to be email format
+// make it so that accounts cannot overlap
+// user registering should auto login
 
 const Signup = () => {
 
@@ -17,6 +19,7 @@ const Signup = () => {
     const [password, setPassword] = React.useState('');
     const [name, setName] = React.useState('');
     const [error, setError] = React.useState('none');
+    const [user, setUser] = React.useContext(userContext);
 
     const signupfunc = (e) => {
         e.preventDefault();
@@ -27,7 +30,7 @@ const Signup = () => {
             setError('Account already exist');
         } else {
             addUser(email, name, password);
-            alert('You have successfully created an account'); //delete this after re route
+            setUser(); // fix this so that when user registers they are logged in
             navigate('/signupverify'); //replace with route to login page
         }
         
@@ -57,7 +60,7 @@ const Signup = () => {
                     Sign Up
                 </Typography>
                 <Box component='form' onSubmit={signupfunc}>
-                    <TextField name='email' type='text' label='Email' fullWidth margin='normal' onChange={onChangeEmail} error={error !== 'none'} />
+                    <TextField name='email' type='email' label='Email' fullWidth margin='normal' onChange={onChangeEmail} error={error !== 'none'} />
                     <TextField name='name' label='Name' fullWidth margin='normal' onChange={onChangeName} error={error !== 'none'} />
                     <TextField name='password' type='password' label='Password' fullWidth margin='normal' onChange={onChangePassword} error={error !== 'none'} />
                     <Typography color='error' sx={{visibility: error === 'none' ? 'hidden' : 'visible'}} >{error}</Typography>
