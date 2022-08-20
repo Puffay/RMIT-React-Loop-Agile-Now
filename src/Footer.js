@@ -10,7 +10,13 @@ function Footer() {
     const [user, setUser] = React.useContext(userContext);
     const navigate = useNavigate();
     return (
-        <Box sx={{ flexGrow: 1, mt: 105 }}>
+        <Box sx={{ 
+        flexGrow: 1, 
+        position: "fixed",
+        left: 0,
+        bottom: 0,
+        right: 0
+        }} >
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant="h7" component="div" >
