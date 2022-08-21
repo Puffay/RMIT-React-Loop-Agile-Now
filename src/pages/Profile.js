@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import Container from '@mui/system/Container';
-import { createTheme, Typography } from '@mui/material';
+import { Button, createTheme, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import { deepOrange, deepPurple } from '@mui/material/colors';
 import TextField from '@mui/material/TextField';
@@ -11,11 +11,25 @@ import { userContext } from '../App';
 
 const Profile = () => {
     const [name, setName] = useState('John Doe');
-    const [blogs, setBlogs] = useState([
-        { title: 'Title', body: 'Description', author: 'Username1', id: 1 },
-        { title: 'Title', body: 'Description', author: 'Username2', id: 2 },
-        { title: 'Title', body: 'Description', author: 'Username3', id: 3 },
-    ]);
+    const [email, setEmail] = useState('');
+    const [nameError, setNameError] = useState(false);
+    const [emailError, setEmailError] = useState(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        if (name === '') {
+            setNameError(true)
+        }
+
+        if (email === '') {
+            setEmailError(true)
+        }
+
+        if (name && email) {
+            console.log(name, email)
+        }
+    }
 
     const [user, setUser] = useContext(userContext);
 
@@ -23,7 +37,7 @@ const Profile = () => {
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
         borderColor: theme.palette.mode === 'dark' ? '#444d58' : '#ced7e0',
         padding: theme.spacing(1),
-        borderRadius: '16px',
+        borderRadius: '24px',
         textAlign: 'center',
     }));
 
@@ -34,17 +48,17 @@ const Profile = () => {
             </Typography>
             <Grid sx={{
                 border: 1,
-                borderRadius: '16px',
+                borderRadius: '24px',
                 borderColor: 'black',
                 boxShadow: 20,
                 width: 600,
-                height: 300,
+                height: 370,
                 mx: 'auto'
             }}>
                 <Item>
-                    <Avatar sx={{ bgcolor: deepPurple[500], width: 170, height: 170, mx:'auto'}}>
+                    <Avatar sx={{ bgcolor: deepPurple[500], width: 170, height: 170, mx: 'auto'}}>
                         <Typography variant="h3" >
-                            NAME
+                            {user.name}
                         </Typography>
                     </Avatar>
                 </Item>
@@ -56,9 +70,33 @@ const Profile = () => {
                         }}
                         noValidate
                         autoComplete="off"
+                        onSubmit={handleSubmit}
                     >
-                        <TextField id="firstname" label="First Name" variant="filled" />
-                        <TextField id="lastname" label="Last Name" variant="filled" />
+                        <TextField
+                            onChange={(e) => setName(e.target.value)} ///fix whatever this is constantly doing
+                            id="name"
+                            label="Name" 
+                            variant="filled"
+                            defaultValue={user.name}
+                            required
+                            error={nameError}
+                        />
+                        <TextField
+                            onChange={(e) => setEmail(e.target.value)} ///fix whatever this is constantly doing
+                            id="email"
+                            label="Email" 
+                            variant="filled"
+                            defaultValue={user.email}
+                            required
+                            error={emailError}
+                        />
+
+                        <Button variant="contained" color="primary" type="submit" onSubmit={handleSubmit}>
+                            Save
+                        </Button>
+                        <Button  variant="contained" color="primary">
+                            Delete
+                        </Button>
                     </Box>
                 </Item>
             </Grid>
@@ -68,3 +106,5 @@ const Profile = () => {
 
 
 export default Profile;
+
+///<TextField id="lastname" label="Last Name" variant="filled" />
