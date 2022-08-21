@@ -1,3 +1,4 @@
+// use this for forum
 const BlogList = (props) => {
     const blogs = props.blogs;
     const title = props.title;

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import BlogList from '../BlogList';
+import BlogList from '../component/BlogList';
 import Paper from '@mui/material/Paper';
 import Container from '@mui/system/Container';
 import Box from '@mui/material/Box';

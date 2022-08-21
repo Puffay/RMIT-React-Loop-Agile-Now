@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import BlogList from '../BlogList';
+import BlogList from '../component/BlogList';
 import Paper from '@mui/material/Paper';
 import Container from '@mui/system/Container';
 import Box from '@mui/material/Box';
@@ -13,6 +13,7 @@ const Forum = () => {
     const [empty, setEmpty] = useState('');
     const [user, setUser] = useContext(userContext);
     const [name, setName] = useState('John Doe');
+    const [forum, setForum] = useState('');
     const [blogs, setBlogs] = useState([
         { title: 'Title', body: 'Description', author: 'Username1', id: 1 },
         { title: 'Title', body: 'Description', author: 'Username2', id: 2 },
@@ -21,13 +22,16 @@ const Forum = () => {
 
     const postForum = (e) => { // post on forum
         e.preventDefault();
+        console.log(forum)
 
         const data = new FormData(e.currentTarget);
         const post = data.get('post');
 
-        setBlogs([...blogs, { title: name, body: 'Description', author: user.username, id: blogs.length + 1 }]);
-
         setEmpty('');
+    }
+
+    const onChangeForum = (e) => {
+        setForum(e.target.value)
     }
 
     return (
@@ -43,13 +47,13 @@ const Forum = () => {
                     rows={4}
                     margin="normal"
                     fullWidth
-                    defaultValue="Write a post"
+                    onChange={onChangeForum}
                 />
                 <Stack direction="row" spacing={2} sx={{ mb: 4, mt: 1 }}>
                     <Button variant="outlined" color="error" onClick={() => { setEmpty(''); }}>
                         Delete
                     </Button>
-                    <Button variant="contained" color="success">
+                    <Button type='submit' variant="contained" color="success">
                         Post
                     </Button>
                 </Stack>
