@@ -8,21 +8,30 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import styled from '@mui/system/styled';
 import { userContext } from '../App';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import * as React from 'react';
 
 const Profile = () => {
-    const [name, setName] = useState('John Doe');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [nameError, setNameError] = useState(false);
     const [emailError, setEmailError] = useState(false);
 
     const handleSubmit = (e) => {
+        const data = new FormData(e.currentTarget);
+        const name = data.get("name");
+        const email = data.get("email");
         e.preventDefault()
 
-        if (name === '') {
+        if (name == '') {
             setNameError(true)
         }
 
-        if (email === '') {
+        if (email == '') {
             setEmailError(true)
         }
 
@@ -41,6 +50,17 @@ const Profile = () => {
         textAlign: 'center',
     }));
 
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
         <Container>
             <Typography component='h1' variant='h7' align='center'>
@@ -56,7 +76,7 @@ const Profile = () => {
                 mx: 'auto'
             }}>
                 <Item>
-                    <Avatar sx={{ bgcolor: deepPurple[500], width: 170, height: 170, mx: 'auto'}}>
+                    <Avatar sx={{ bgcolor: deepPurple[500], width: 170, height: 170, mx: 'auto' }}>
                         <Typography variant="h3" >
                             {user.name}
                         </Typography>
@@ -71,22 +91,21 @@ const Profile = () => {
                         noValidate
                         autoComplete="off"
                         onSubmit={handleSubmit}
+
                     >
                         <TextField
-                            onChange={(e) => setName(e.target.value)} ///fix whatever this is constantly doing
-                            id="name"
-                            label="Name" 
-                            variant="filled"
                             defaultValue={user.name}
+                            name="name"
+                            label="Name"
+                            variant="filled"
                             required
                             error={nameError}
                         />
                         <TextField
-                            onChange={(e) => setEmail(e.target.value)} ///fix whatever this is constantly doing
-                            id="email"
-                            label="Email" 
-                            variant="filled"
                             defaultValue={user.email}
+                            name="email"
+                            label="Email"
+                            variant="filled"
                             required
                             error={emailError}
                         />
@@ -94,9 +113,31 @@ const Profile = () => {
                         <Button variant="contained" color="primary" type="submit" onSubmit={handleSubmit}>
                             Save
                         </Button>
-                        <Button  variant="contained" color="primary">
+                        <Button variant="contained" color="primary" onClick={handleClickOpen}>
                             Delete
                         </Button>
+                        <Dialog
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <DialogTitle id="alert-dialog-title">
+                                {"Delete Account Confirmation"} 
+                            </DialogTitle>
+                            <DialogContent>
+                                <DialogContentText id="alert-dialog-description">
+                                    Are you sure you want to delete your account? This includes all your account's existing posts.
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleClose}>Yes</Button>
+                                <Button onClick={handleClose} autoFocus>
+                                    No
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
+
                     </Box>
                 </Item>
             </Grid>
@@ -106,5 +147,3 @@ const Profile = () => {
 
 
 export default Profile;
-
-///<TextField id="lastname" label="Last Name" variant="filled" />
