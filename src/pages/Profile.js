@@ -61,6 +61,13 @@ const Profile = () => {
         setOpen(false);
     };
 
+    const handleDelete = () => {
+        setOpen(false);
+        
+        setUser(undefined);
+        localStorage.removeItem('user');
+    };
+
     return (
         <Container>
             <Typography component='h1' variant='h7' align='center'>
@@ -131,13 +138,12 @@ const Profile = () => {
                                 </DialogContentText>
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleClose}>Yes</Button>
+                                <Button onClick={handleDelete}>Yes</Button>
                                 <Button onClick={handleClose} autoFocus>
                                     No
                                 </Button>
                             </DialogActions>
                         </Dialog>
-
                     </Box>
                 </Item>
             </Grid>
