@@ -12,8 +12,6 @@ const ForumList = (props) => {
     const [user, setUser] = React.useContext(userContext);
     const title = props.title; // not needed unless i can think of something else to do with it
 
-    console.log(props, forums); //delete
-
     return (
         <Container>
             {forums.map((forum) => (

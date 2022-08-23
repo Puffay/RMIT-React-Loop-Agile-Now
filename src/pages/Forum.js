@@ -30,7 +30,7 @@ const Forum = () => {
     //TODO this is for the textboxs which creates forums
     const onChangeForum = (e) => {
         setForum(e.target.value);
-        console.log(forum);
+        //console.log(forum);
     }
 
     // Delete Post
@@ -43,10 +43,10 @@ const Forum = () => {
     //TODO: fixs buttons Delete and Post
     return (
         <Container>
-            <Typography component='h1' variant='h7' align='center'>
-                Welcome {user.user}
+            <Typography component='h1' variant='h7' align='left'>
+                Welcome {user.name}
             </Typography>
-            <Box onSubmit={postForum} align='center' >
+            <Box onSubmit={postForum} component='form' align='center' >
                 <TextField
                     name="post"
                     label="New post"

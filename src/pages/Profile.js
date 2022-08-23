@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import Container from '@mui/system/Container';
-import { Button, createTheme, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import { deepOrange, deepPurple } from '@mui/material/colors';
 import TextField from '@mui/material/TextField';
@@ -13,6 +13,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { deleteUser } from '../data/database';
 import * as React from 'react';
 
 const Profile = () => {
@@ -27,11 +28,11 @@ const Profile = () => {
         const email = data.get("email");
         e.preventDefault()
 
-        if (name == '') {
+        if (name === '') {
             setNameError(true)
         }
 
-        if (email == '') {
+        if (email === '') {
             setEmailError(true)
         }
 
@@ -63,7 +64,7 @@ const Profile = () => {
 
     const handleDelete = () => {
         setOpen(false);
-        
+        deleteUser(user.email);
         setUser(undefined);
         localStorage.removeItem('user');
     };

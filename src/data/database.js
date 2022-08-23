@@ -81,11 +81,17 @@ function addUser(email, name, password) {
   localStorage.setItem(USERS_KEY, JSON.stringify(users));
 }
 
+function deleteUser(email) {
+  const users = getUsers().filter(user => user.email !== email);
+  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+}
+
 export {
   initUsers,
   verifyUser,
   getUser,
   removeUser,
   addUser,
-  existUser
+  existUser,
+  deleteUser
 }
