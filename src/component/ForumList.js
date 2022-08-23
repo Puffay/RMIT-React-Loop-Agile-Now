@@ -1,4 +1,4 @@
-import { Box, Button, Container, Grid, Paper, Typography } from "@mui/material";
+import { Avatar, Box, Button, Container, Grid, Paper, Stack, Typography } from "@mui/material";
 import React from "react";
 import { userContext } from "../App";
 
@@ -22,26 +22,33 @@ const ForumList = (props) => {
                     <Paper>
                         <Grid container spacing={2} >
                             <Grid item xs={8}>
-                                <Typography component='h3' variant='h3' sx={{ color: 'red', mb: '16px', ml: '16px', fontSize: 25 }}>
-                                    {forum.title}
-                                </Typography>
+                                <Stack spacing={2} direction="row">
+                                    <Avatar sx={{ color: 'red', mb: '16px', ml: '16px', fontSize: 25 }}>
+                                    </Avatar>
+                                    <Typography variant="h6" component="h6">
+                                        {forum.author}
+                                    </Typography>
+                                </Stack>
                             </Grid>
                             <Grid item xs={4}>
-                                {user === null ? (
+                                {user === null || (!props.canDelete ?? false) ? (
                                     <div></div>)
                                     : (
-                                    <Button onClick={() => handleDelete(forum.id)} sx={{ ml: '220px' }} >
-                                        Delete Post
-                                    </Button>)
+                                        <Button onClick={() => handleDelete(forum.id)} sx={{ ml: '220px' }} >
+                                            Delete Post
+                                        </Button>)
                                 }
                             </Grid>
                         </Grid>
                         <Typography component='p' variant='p' sx={{ mb: '8px', ml: '10px' }}>
                             {forum.body}
                         </Typography>
-                        <Typography component='p' variant='p' sx={{ mb: '8px', ml: '10px' }}>
-                            {forum.author}
-                        </Typography>
+                        {forum.image === null ? (
+                            <div></div>
+                        ) : (
+                            <Avatar src={forum.image} variant='square' sx={{ mb: '16px', ml: '16px', height: '100px', width: '100px' }}>
+                            </Avatar>
+                        )}
                     </Paper>
                 </Container>
             ))}
