@@ -15,8 +15,10 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { deleteUser } from '../data/database';
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
+    const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [nameError, setNameError] = useState(false);
@@ -65,8 +67,9 @@ const Profile = () => {
     const handleDelete = () => {
         setOpen(false);
         deleteUser(user.email);
-        setUser(undefined);
+        setUser(null);
         localStorage.removeItem('user');
+        navigate('/');
     };
 
     return (
