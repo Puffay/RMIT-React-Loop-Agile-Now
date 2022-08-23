@@ -7,13 +7,14 @@ import { Button, createTheme, Stack, TextField, Typography } from '@mui/material
 import { userContext } from '../App';
 
 // TODO: make the forum post and delete functional
+// TODO: i managed to loop the ForumList some how, on line 57
 
 const Forum = () => {
 
     const [empty, setEmpty] = useState('');
     const [user, setUser] = useContext(userContext);
     const [name, setName] = useState('John Doe');
-    const [forum, setForum] = useState();
+    const [forum, setForum] = useState('');
     const [forums, setForums] = useState([
         { title: 'Title', body: 'Description', author: 'Username1', id: 1 },
         { title: 'Title', body: 'Description', author: 'Username2', id: 2 },
@@ -22,37 +23,32 @@ const Forum = () => {
 
     const postForum = (e) => { // post on forum
         e.preventDefault();
-        console.log('forum');
 
-
+        console.log('Did the post forum work?');
     }
 
-    // this is for the textboxs which creates forums
+    //TODO this is for the textboxs which creates forums
     const onChangeForum = (e) => {
         setForum(e.target.value);
         console.log(forum);
     }
 
-    const handleClick = (e) => {
-        console.log('clicked', e);
-        // testing
-    }
-
+    // Delete Post
     const handleDelete = (id) => {
-        const newForums = forum.filter(forum => forum.id !== id);
-        setForums(newForums)
+        const newForums = forums.filter(forum => forum.id !== id);
+        setForums(newForums);
         console.log('delete forum');
     }
 
-    // fixs buttons Delete and Post
+    //TODO: fixs buttons Delete and Post
     return (
         <Container>
             <Typography component='h1' variant='h7' align='center'>
-                Welcome {user.name}
+                Welcome {user.user}
             </Typography>
             <Box onSubmit={postForum} align='center' >
                 <TextField
-                    id="post"
+                    name="post"
                     label="New post"
                     multiline
                     rows={4}
@@ -64,7 +60,7 @@ const Forum = () => {
                     <Button variant="outlined" color="error" onClick={() => { setEmpty(''); console.log('clicked delete') }}>
                         Delete
                     </Button>
-                    <Button type='submit' variant="contained" color="success" onClick={handleClick}>
+                    <Button type='submit' variant="contained" color="success">
                         Post
                     </Button>
                 </Stack>
@@ -74,7 +70,7 @@ const Forum = () => {
                     Post from other users
                 </Typography>
             </Container>
-            <ForumList forums={forums}  />
+            <ForumList forums={forums} handleDelete={handleDelete} />
         </Container>
     );
 }

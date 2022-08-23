@@ -1,10 +1,15 @@
 import { Box, Button, Container, Grid, Paper, Typography } from "@mui/material";
+import React from "react";
+import { userContext } from "../App";
 
-// use this for forum
+// This is for forum
+
+//TODO: fix this so that delete post only shows user who created post and also don't show in home page
 
 const ForumList = (props) => {
     const forums = props.forums;
     const handleDelete = props.handleDelete;
+    const [user, setUser] = React.useContext(userContext);
     const title = props.title; // not needed unless i can think of something else to do with it
 
     console.log(props, forums); //delete
@@ -24,15 +29,19 @@ const ForumList = (props) => {
                                 </Typography>
                             </Grid>
                             <Grid item xs={4}>
-                                <Button onClick={() => handleDelete(forum.id)} sx={{ ml: '220px' }} >
-                                    Delete Post
-                                </Button>
+                                {user === null ? (
+                                    <div></div>)
+                                    : (
+                                    <Button onClick={() => handleDelete(forum.id)} sx={{ ml: '220px' }} >
+                                        Delete Post
+                                    </Button>)
+                                }
                             </Grid>
                         </Grid>
-                        <Typography component='p' variant='p' sx={{mb: '8px', ml: '10px'}}>
+                        <Typography component='p' variant='p' sx={{ mb: '8px', ml: '10px' }}>
                             {forum.body}
                         </Typography>
-                        <Typography component='p' variant='p' sx={{mb: '8px', ml: '10px'}}>
+                        <Typography component='p' variant='p' sx={{ mb: '8px', ml: '10px' }}>
                             {forum.author}
                         </Typography>
                     </Paper>
