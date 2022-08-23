@@ -23,7 +23,7 @@ const darkTheme = createTheme({
 });
 
 function App() {
-  const userState = useState(localStorage.getItem('user'));
+  const userState = useState(JSON.parse(localStorage.getItem("user")));
   initUsers();
   return (
     <ThemeProvider theme={darkTheme}>
