@@ -28,12 +28,14 @@ const Forum = () => {
         setError(null)
         if (body === '') {
             setError('Please enter a post');
+        } else if (forum.length > 250) {
+            setError('Post cannot exceed 250 characters');
         }
         else {
             setForums([addForum(author, body, image), ...forums]);
+            e.target.reset();
         }
         image = null;
-        e.target.reset();
         console.log('Did the post forum work?');
     }
 
