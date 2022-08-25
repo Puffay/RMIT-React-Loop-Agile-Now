@@ -77,7 +77,8 @@ function addUser(email, name, password) {
   users.push({
     email: email,
     name: name,
-    password: password
+    password: password,
+    date: Date.now()
   });
   localStorage.setItem(USERS_KEY, JSON.stringify(users));
 }

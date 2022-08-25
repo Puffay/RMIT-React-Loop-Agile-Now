@@ -121,6 +121,12 @@ const Profile = () => {
                             required
                             error={emailError}
                         />
+                        <TextField
+                            name="dateofjoining"
+                            label="Date of Joining"
+                            disabled
+                            defaultValue={new Date(user.date).toLocaleDateString("en-AU")}
+                        />  
 
                         <Button variant="contained" color="primary" type="submit" onSubmit={handleSubmit}>
                             Save

@@ -29,7 +29,8 @@ const Signup = () => {
             setError('Account already exist');
         } else {
             addUser(email, name, password);
-            setUser(verifyUser(email, password)); // when user registers they are logged in
+            verifyUser(email, password);
+            setUser(getUser()); // when user registers they are logged in
             navigate('/signupverify');
         }
         
