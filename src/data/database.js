@@ -1,5 +1,6 @@
 const USERS_KEY = "users";
 const USER_KEY = "user";
+const FORUMS_KEY = "forums";
 
 //Using week3 code as base
 
@@ -95,6 +96,30 @@ function editUser(name, email) {
   localStorage.setItem(USER_KEY, JSON.stringify(user));
 }
 
+function getForums() {
+  const data = localStorage.getItem(FORUMS_KEY);
+  return JSON.parse(data);
+  }
+
+function addForum(author, body, image) {
+  const forums = getForums() ?? [];
+  let increment = localStorage.getItem('increment') ?? 0;
+  forums.unshift({
+    id: increment++,
+    author: author,
+    body: body,
+    image: image
+  });
+  localStorage.setItem(FORUMS_KEY, JSON.stringify(forums));
+  localStorage.setItem('increment', increment);
+  return forums[0];
+}
+
+function deleteForum(id) {
+  const forums = getForums().filter(forum => forum.id !== id);
+  localStorage.setItem(FORUMS_KEY, JSON.stringify(forums));
+}
+
 export {
   initUsers,
   verifyUser,
@@ -103,5 +128,8 @@ export {
   addUser,
   existUser,
   deleteUser,
-  editUser
+  editUser,
+  getForums,
+  addForum,
+  deleteForum
 }

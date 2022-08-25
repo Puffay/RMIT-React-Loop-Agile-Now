@@ -1,5 +1,6 @@
 import { Avatar, Box, Button, Container, Grid, Paper, Stack, Typography } from "@mui/material";
 import React from "react";
+import { useEffect } from "react";
 import { userContext } from "../App";
 
 // This is for forum
@@ -10,7 +11,6 @@ const ForumList = (props) => {
     const forums = props.forums;
     const handleDelete = props.handleDelete;
     const [user, setUser] = React.useContext(userContext);
-    const title = props.title; // not needed unless i can think of something else to do with it
 
     return (
         <Container>
@@ -46,8 +46,16 @@ const ForumList = (props) => {
                         {forum.image === null ? (
                             <div></div>
                         ) : (
+                            <div>
+                            {(forum.image && forum.image.startsWith("data:video")) ? (
+                                <video controls loop>
+                                    <source src={forum.image} type="video/mp4" />
+                                </video>
+                            ) : (
                             <Avatar src={forum.image} variant='square' sx={{ mb: '16px', ml: '16px', height: '100px', width: '100px' }}>
                             </Avatar>
+                            )}
+                            </div>
                         )}
                     </Paper>
                 </Container>

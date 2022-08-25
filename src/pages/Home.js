@@ -5,14 +5,10 @@ import Container from '@mui/system/Container';
 import Box from '@mui/material/Box';
 import { createTheme, Typography } from '@mui/material';
 import { Margin } from '@mui/icons-material';
+import { getForums } from '../data/database';
 
 const Home = () => {
-    const [name, setName] = useState('John Doe');
-    const [forums, setForums] = useState([
-        { title: 'Title', body: 'Description', author: 'Username1', id: 1 },
-        { title: 'Title', body: 'Description', author: 'Username2', id: 2 },
-        { title: 'Title', body: 'Description', author: 'Username3', id: 3 },
-    ]);
+    const [forums, setForums] = useState(getForums() ?? []);
 
     return (
         <Container>
