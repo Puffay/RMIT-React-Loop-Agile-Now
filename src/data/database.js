@@ -86,6 +86,15 @@ function deleteUser(email) {
   localStorage.setItem(USERS_KEY, JSON.stringify(users));
 }
 
+function editUser(name, email) {
+  const users = getUsers();
+  const user = users.find(user => user.email === getUser().email);
+  user.name = name;
+  user.email = email;
+  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+  localStorage.setItem(USER_KEY, JSON.stringify(user));
+}
+
 export {
   initUsers,
   verifyUser,
@@ -93,5 +102,6 @@ export {
   removeUser,
   addUser,
   existUser,
-  deleteUser
+  deleteUser,
+  editUser
 }

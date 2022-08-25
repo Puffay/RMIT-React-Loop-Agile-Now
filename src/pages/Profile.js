@@ -16,6 +16,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { deleteUser } from '../data/database';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { editUser } from '../data/database';
 
 const Profile = () => {
     const navigate = useNavigate();
@@ -37,7 +38,9 @@ const Profile = () => {
         }
 
         if (name && email) {
-            console.log(name, email)
+            console.log(name, email);
+            editUser(name, email);
+            navigate('/')
         }
     }
 
