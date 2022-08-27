@@ -9,8 +9,6 @@ import { addUser, existUser, getUser, verifyUser } from '../data/database';
 import { useNavigate } from 'react-router-dom';
 import { userContext } from '../App';
 
-// password should be "Strong"
-
 const Signup = () => {
 
     const navigate = useNavigate();
@@ -27,6 +25,8 @@ const Signup = () => {
             setError('Please fill out all fields');
         } else if (existUser(email)) { //should check to see if user already exists
             setError('Account already exist');
+        } else if (password.length < 8) { // Check if password is strong
+            setError('Password should be at least 8 characters');
         } else {
             addUser(email, name, password);
             verifyUser(email, password);
