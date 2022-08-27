@@ -1,11 +1,10 @@
 import { useContext, useState } from 'react';
 import Container from '@mui/system/Container';
-import { Button, Typography } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import { deepPurple } from '@mui/material/colors';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import styled from '@mui/system/styled';
 import { userContext } from '../App';
 import Dialog from '@mui/material/Dialog';
@@ -78,13 +77,11 @@ const Profile = () => {
             <Typography component='h1' variant='h7' align='center'>
                 Welcome {user.name}
             </Typography>
-            <Grid sx={{
+            <Stack sx={{
                 border: 1,
                 borderRadius: '24px',
                 borderColor: 'black',
                 boxShadow: 20,
-                width: 600,
-                height: 370,
                 mx: 'auto'
             }}>
                 <Item>
@@ -126,14 +123,8 @@ const Profile = () => {
                             label="Date of Joining"
                             disabled
                             defaultValue={new Date(user.date).toLocaleDateString("en-AU")}
-                        />  
+                        />
 
-                        <Button variant="contained" color="primary" type="submit" onSubmit={handleSubmit}>
-                            Save
-                        </Button>
-                        <Button variant="contained" color="primary" onClick={handleClickOpen}>
-                            Delete
-                        </Button>
                         <Dialog
                             open={open}
                             onClose={handleClose}
@@ -141,7 +132,7 @@ const Profile = () => {
                             aria-describedby="alert-dialog-description"
                         >
                             <DialogTitle id="alert-dialog-title">
-                                {"Delete Account Confirmation"} 
+                                {"Delete Account Confirmation"}
                             </DialogTitle>
                             <DialogContent>
                                 <DialogContentText id="alert-dialog-description">
@@ -156,8 +147,16 @@ const Profile = () => {
                             </DialogActions>
                         </Dialog>
                     </Box>
+                    <Box alignItems={'center'} justifyContent={'space-between'}>
+                        <Button variant="contained" color="primary" type="submit" onSubmit={handleSubmit} sx={{ mr: '20px' }}>
+                            Save
+                        </Button>
+                        <Button variant="contained" color="primary" onClick={handleClickOpen}>
+                            Delete
+                        </Button>
+                    </Box>
                 </Item>
-            </Grid>
+            </Stack>
         </Container >
     );
 }
