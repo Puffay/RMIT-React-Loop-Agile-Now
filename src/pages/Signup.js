@@ -1,13 +1,10 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import { Container } from '@mui/material';
+import { Container, Box, TextField, Button, Paper, Typography } from '@mui/material';
 import { addUser, existUser, getUser, verifyUser } from '../data/database';
 import { useNavigate } from 'react-router-dom';
 import { userContext } from '../App';
+
+// Page for user to sign up for an account
 
 const Signup = () => {
 

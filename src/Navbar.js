@@ -1,15 +1,10 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import { Link, Navigate, Router, useNavigate } from 'react-router-dom';
-import { fontWeight } from '@mui/system';
+import { AppBar, Box, Toolbar, Typography, Button } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 import { userContext } from './App';
 import { removeUser } from './data/database';
+
+// Shows the Navbar on the page that change depending on if the user is logged in or not
 
 function Navbar() {
     const [user, setUser] = React.useContext(userContext);

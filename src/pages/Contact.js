@@ -1,5 +1,7 @@
 import Container from '@mui/system/Container';
-import { createTheme, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
+
+// About page
 
 const Contact = () => {
     

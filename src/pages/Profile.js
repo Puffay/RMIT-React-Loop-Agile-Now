@@ -1,21 +1,15 @@
+import * as React from 'react';
 import { useContext, useState } from 'react';
 import Container from '@mui/system/Container';
-import { Button, Stack, Typography } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
+import { Button, Stack, Typography, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Avatar, TextField, Box } from '@mui/material';
 import { deepPurple } from '@mui/material/colors';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
 import styled from '@mui/system/styled';
 import { userContext } from '../App';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import { deleteUser } from '../data/database';
-import * as React from 'react';
+import { editUser, getUserName } from '../data/database';
 import { useNavigate } from 'react-router-dom';
-import { editUser } from '../data/database';
+
+// Profile Page for editing profile and deleting account
 
 const Profile = () => {
     const navigate = useNavigate();
@@ -38,7 +32,7 @@ const Profile = () => {
 
         if (name && email) {
             console.log(name, email);
-            editUser(name, email);
+            setUser(editUser(name, email));
             navigate('/')
         }
     }
@@ -87,73 +81,75 @@ const Profile = () => {
                 <Item>
                     <Avatar sx={{ bgcolor: deepPurple[500], width: 170, height: 170, mx: 'auto' }}>
                         <Typography variant="h3" >
-                            {user.name}
+                            {getUserName(user.id).split(' ').map(str => str[0]).join('')}
                         </Typography>
                     </Avatar>
                 </Item>
                 <Item>
-                    <Box
-                        component="form"
+                    <Box component="form" onSubmit={handleSubmit}>
+                        <Box
                         sx={{
-                            '& > :not(style)': { m: 2, width: '25ch' },
-                        }}
-                        noValidate
-                        autoComplete="off"
-                        onSubmit={handleSubmit}
-
-                    >
-                        <TextField
-                            defaultValue={user.name}
-                            name="name"
-                            label="Name"
-                            variant="filled"
-                            required
-                            error={nameError}
-                        />
-                        <TextField
-                            defaultValue={user.email}
-                            name="email"
-                            label="Email"
-                            variant="filled"
-                            required
-                            error={emailError}
-                        />
-                        <TextField
-                            name="dateofjoining"
-                            label="Date of Joining"
-                            disabled
-                            defaultValue={new Date(user.date).toLocaleDateString("en-AU")}
-                        />
-
-                        <Dialog
-                            open={open}
-                            onClose={handleClose}
-                            aria-labelledby="alert-dialog-title"
-                            aria-describedby="alert-dialog-description"
+                                '& > :not(style)': { m: 2, width: '25ch' },
+                            }}
+                            noValidate
+                            autoComplete="off"
                         >
-                            <DialogTitle id="alert-dialog-title">
-                                {"Delete Account Confirmation"}
-                            </DialogTitle>
-                            <DialogContent>
-                                <DialogContentText id="alert-dialog-description">
-                                    Are you sure you want to delete your account? This includes all your account's existing posts.
-                                </DialogContentText>
-                            </DialogContent>
-                            <DialogActions>
-                                <Button onClick={handleDelete}>Yes</Button>
-                                <Button onClick={handleClose} autoFocus>
-                                    No
-                                </Button>
-                            </DialogActions>
-                        </Dialog>
-                    </Box>
-                    <Box alignItems={'center'} justifyContent={'space-between'}>
-                        <Button variant="contained" color="primary" type="submit" onSubmit={handleSubmit} sx={{ mr: '20px' }}>
-                            Save
-                        </Button>
-                        <Button variant="contained" color="primary" onClick={handleClickOpen}>
-                            Delete
-                        </Button>
+                            <TextField
+                                defaultValue={user.name}
+                                name="name"
+                                label="Name"
+                                variant="filled"
+                                required
+                                error={nameError}
+                            />
+                            <TextField
+                                defaultValue={user.email}
+                                name="email"
+                                label="Email"
+                                type="email"
+                                variant="filled"
+                                required
+                                error={emailError}
+                            />
+                            <TextField
+                                name="dateofjoining"
+                                label="Date of Joining"
+                                disabled
+                                defaultValue={new Date(user.date).toLocaleDateString("en-AU")}
+                            />
+
+                            <Dialog
+                                open={open}
+                                onClose={handleClose}
+                                aria-labelledby="alert-dialog-title"
+                                aria-describedby="alert-dialog-description"
+                            >
+                                <DialogTitle id="alert-dialog-title">
+                                    {"Delete Account Confirmation"}
+                                </DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText id="alert-dialog-description">
+                                        Are you sure you want to delete your account? This includes all your account's existing posts.
+                                    </DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={handleDelete}>
+                                        Yes
+                                    </Button>
+                                    <Button onClick={handleClose} autoFocus>
+                                        No
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
+                        </Box>
+                        <Box alignItems={'center'} justifyContent={'space-between'}>
+                            <Button variant="contained" color="primary" type="submit" onSubmit={handleSubmit} sx={{ mr: '20px' }}>
+                                Save
+                            </Button>
+                            <Button variant="contained" color="primary" onClick={handleClickOpen}>
+                                Delete
+                            </Button>
+                        </Box>
                     </Box>
                 </Item>
             </Stack>

@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import ForumList from '../component/ForumList';
-import Paper from '@mui/material/Paper';
 import Container from '@mui/system/Container';
-import Box from '@mui/material/Box';
-import { createTheme, Typography } from '@mui/material';
-import { Margin } from '@mui/icons-material';
+import { Typography } from '@mui/material';
 import { getForums } from '../data/database';
 
+// Home page that shows post from other users
+
 const Home = () => {
-    const [forums, setForums] = useState(getForums() ?? []);
+    const [forums, setForums] = useState([]);
+
+    useState(() => {
+        setForums(getForums() ?? []);
+    });
 
     return (
         <Container>

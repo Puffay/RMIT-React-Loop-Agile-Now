@@ -9,28 +9,21 @@ import Signupverify from './pages/Signupverify';
 import Footer from './Footer';
 import Contact from './pages/Contact';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import { CssBaseline, Box } from '@mui/material';
 import { initUsers } from './data/database';
 import { createContext, useState } from 'react';
 
-
 export const userContext = createContext();
-
-const darkTheme = createTheme({
-  palette: {
-    mode: 'light',
-  },
-});
 
 function App() {
   const userState = useState(JSON.parse(localStorage.getItem("user")));
   initUsers();
   return (
-    <ThemeProvider theme={darkTheme}>
+    <Box>
       <CssBaseline />
       <userContext.Provider value={userState}>
         <BrowserRouter>
-          <div>
+          <Box>
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
@@ -41,11 +34,12 @@ function App() {
               <Route path="/signupverify" element={<Signupverify />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>
+            <Box sx={{ mb: '100px' }}></Box>
             <Footer />
-          </div>
+          </Box>
         </BrowserRouter>
       </userContext.Provider>
-    </ThemeProvider>
+    </Box>
   );
 }
 

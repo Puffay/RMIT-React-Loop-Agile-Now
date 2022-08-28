@@ -13,14 +13,16 @@ function initUsers() {
   // User data is hard-coded, passwords are in plain-text.
   const users = [
     {
-      email: 'a@a.con',
-      name: "mbolger",
-      password: "abc123"
+      id: -1,
+      email: 'a@a.com',
+      name: "Jason Dori",
+      password: "abcd1234"
     },
     {
+      id: -2,
       email: 'b@b.com',
-      name: "shekhar",
-      password: "def456"
+      name: "Adan Smith",
+      password: "defg4567"
     }
   ];
 
@@ -74,13 +76,16 @@ function removeUser() {
 
 function addUser(email, name, password) {
   const users = getUsers();
+  let increment = localStorage.getItem('increment') ?? 0;
   users.push({
+    id: increment++,
     email: email,
     name: name,
     password: password,
     date: Date.now()
   });
   localStorage.setItem(USERS_KEY, JSON.stringify(users));
+  localStorage.setItem('increment', increment);
 }
 
 function deleteUser(email) {
@@ -90,11 +95,17 @@ function deleteUser(email) {
 
 function editUser(name, email) {
   const users = getUsers();
-  const user = users.find(user => user.email === getUser().email);
+  const user = users.find(user => user.id === getUser().id);
   user.name = name;
   user.email = email;
-  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+  setUser(user);
   localStorage.setItem(USER_KEY, JSON.stringify(user));
+  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+  return user;
+}
+
+function getUserName(id) {
+  return getUsers().find(user => user.id === id).name;
 }
 
 function getForums() {
@@ -116,6 +127,10 @@ function addForum(author, body, image) {
   return forums[0];
 }
 
+function setForums(forums) {
+  localStorage.setItem(FORUMS_KEY, JSON.stringify(forums));
+}
+
 function deleteForum(id) {
   const forums = getForums().filter(forum => forum.id !== id);
   localStorage.setItem(FORUMS_KEY, JSON.stringify(forums));
@@ -130,7 +145,9 @@ export {
   existUser,
   deleteUser,
   editUser,
+  getUserName,
   getForums,
   addForum,
+  setForums,
   deleteForum
 }
