@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ForumList from '../component/ForumList';
 import Container from '@mui/system/Container';
 import { Typography } from '@mui/material';
-import { getForums } from '../data/database';
+import { getPosts } from '../data/repository';
 
 // Home page that shows post from other users
 
@@ -10,7 +10,9 @@ const Home = () => {
     const [forums, setForums] = useState([]);
 
     useState(() => {
-        setForums(getForums() ?? []);
+        getPosts().then((data) => {
+            setForums(data);
+        });
     });
 
     return (

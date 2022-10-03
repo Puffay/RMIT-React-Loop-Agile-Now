@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Container, Box, TextField, Button, Paper, Typography } from '@mui/material';
-import { getUser, verifyUser } from '../data/database';
+import { getUser } from '../data/database';
+import { verifyUser } from '../data/repository';
 import { useNavigate } from "react-router-dom";
 import { userContext } from '../App';
 
@@ -16,13 +17,13 @@ const Login = () => {
         const data = new FormData(e.currentTarget);
         const email = data.get('email');
         const password = data.get('password');
-        if (verifyUser(email, password)) {
-            setUser(getUser());
+
+        verifyUser(email, password).then((res) => {
+            setUser(res.data);
             navigate('/profile');
-        } else {
+        }).catch((err) => {
             setError('Invalid email or password');
-        }
-        console.log('login');
+        });
     }
 
     return (

@@ -3,6 +3,7 @@ import React from "react";
 import { userContext } from "../App";
 import { getUserName } from "../data/database";
 import { deepPurple } from '@mui/material/colors';
+import ReactMarkdown from 'react-markdown';
 
 // Forum page componenet for the forum page that shows the forum posts
 
@@ -12,26 +13,22 @@ const ForumList = (props) => {
     const handleEdit = props.handleEdit;
     const [user] = React.useContext(userContext);
 
-    const getAuthorName = (author) => {
-        return getUserName(author);
-    }
-
     return (
         <Container>
             {forums.map((forum) => (
-                <Container key={forum.id} sx={{
+                <Container key={forum.post_id} sx={{
                     px: '10px',
                     py: '16px'
                 }}>
-                    <Paper>
+                    <Paper sx={{ pb: '5px' }}>
                         <Grid container spacing={3} >
                             <Grid item xs={8}>
                                 <Stack spacing={2} direction="row">
                                     <Avatar sx={{ bgcolor: deepPurple[500], mb: '16px', ml: '16px' }}>
-                                        {getAuthorName(forum.author).split(' ').map(str => str[0]).join('')}
+                                        {forum.user.name.split(' ').map(str => str[0]).join('')}
                                     </Avatar>
                                     <Typography variant="h6" component="h6">
-                                        {getAuthorName(forum.author)}
+                                        {forum.user.name}
                                     </Typography>
                                 </Stack>
                             </Grid>
@@ -52,12 +49,10 @@ const ForumList = (props) => {
                                 }
                             </Grid>
                         </Grid>
-                        <Typography component='p' variant='p' sx={{ mb: '8px', ml: '10px' }}>
-                            {forum.body}
-                        </Typography>
-                        {forum.image === null ? (
-                            <div></div>
-                        ) : (
+                        <Container>
+                            <ReactMarkdown children={forum.text}></ReactMarkdown>
+                        </Container>
+                        {forum.image ? (
                             <div>
                                 {(forum.image && forum.image.startsWith("data:video")) ? (
                                     <video controls loop>
@@ -68,7 +63,7 @@ const ForumList = (props) => {
                                     </Avatar>
                                 )}
                             </div>
-                        )}
+                        ) : (<div></div>)}
                     </Paper>
                 </Container>
             ))}

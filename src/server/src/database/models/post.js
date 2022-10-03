@@ -8,8 +8,18 @@ module.exports = (sequelize, DataTypes) =>
     text: {
       type: DataTypes.TEXT,
       allowNull: false
+    },
+    image: {
+      type: DataTypes.BLOB('long'),
+      allowNull: true,
+      get() {
+        if (this.getDataValue('image')) {
+          return this.getDataValue('image').toString('utf8');
+        }
+        return undefined;
+      },
     }
   }, {
     // Don't add the timestamp attributes (updatedAt, createdAt).
-    timestamps: false
+    timestamps: true
   });

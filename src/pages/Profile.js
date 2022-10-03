@@ -6,7 +6,7 @@ import { deepPurple } from '@mui/material/colors';
 import styled from '@mui/system/styled';
 import { userContext } from '../App';
 import { deleteUser } from '../data/database';
-import { editUser, getUserName } from '../data/database';
+import { editUser } from '../data/database';
 import { useNavigate } from 'react-router-dom';
 
 // Profile Page for editing profile and deleting account
@@ -81,7 +81,7 @@ const Profile = () => {
                 <Item>
                     <Avatar sx={{ bgcolor: deepPurple[500], width: 170, height: 170, mx: 'auto' }}>
                         <Typography variant="h3" >
-                            {getUserName(user.id).split(' ').map(str => str[0]).join('')}
+                            {user.name.split(' ').map(str => str[0]).join('')}
                         </Typography>
                     </Avatar>
                 </Item>

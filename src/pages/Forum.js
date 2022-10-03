@@ -1,9 +1,10 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ForumList from '../component/ForumList';
 import { Avatar, Box, Container, Button, Icon, IconButton, Stack, TextField, Typography, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { userContext } from '../App';
 import { PhotoCamera } from '@mui/icons-material';
-import { addForum, getForums, deleteForum, setForums } from '../data/database';
+import { deleteForum, setForums } from '../data/database';
+import { getPosts, createPost } from '../data/repository';
 
 // Forum page for user to post and view other users posts. can also edit and delete own posts
 
@@ -12,10 +13,16 @@ const Forum = () => {
     const [user] = useContext(userContext);
     const [error, setError] = useState('none');
     const [image, setImage] = useState(null);
-    const [forums, setForumsState] = useState(getForums() ?? []);
+    const [forums, setForumsState] = useState([]);
     const [editDialogOpen, setEditDialogOpen] = useState(false);
     const [editID, setEditID] = useState(null);
     const [editBody, setEditBody] = useState('');
+
+    useEffect(() => {
+        getPosts().then((posts) => {
+            setForumsState(posts);
+        });
+    }, []);
 
     // Post on forum
     const postForum = (e) => {
@@ -26,13 +33,17 @@ const Forum = () => {
         setError(null)
         if (body === '') {
             setError('Please enter a post');
-        } else if (body.length > 250) {
-            setError('Post cannot exceed 250 characters');
+        } else if (body.length > 600) {
+            setError('Post cannot exceed 600 characters');
         }
         else {
-            setForumsState([addForum(author, body, image), ...forums]);
-            setImage(null);
-            e.target.reset();
+            createPost({ text: body, id: author, image: image }).then((res) => {
+                setForumsState([res, ...forums]);
+                setImage(null);
+                e.target.reset();
+            }).catch((error) => {
+                setError(error.message);
+            });
         }
     }
 
@@ -113,7 +124,7 @@ const Forum = () => {
                     <Typography color='error' sx={{ pt: 1, visibility: error === 'none' ? 'hidden' : 'visible' }} >{error}</Typography>
                 </Stack>
             </Box>
-            <Container>
+            <Container sx={{ mb: 2 }}>
                 <Typography component='h1' variant='h7' align='left' fontSize={24}>
                     Post from other users
                 </Typography>

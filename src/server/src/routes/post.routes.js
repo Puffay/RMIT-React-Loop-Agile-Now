@@ -8,6 +8,9 @@ module.exports = (express, app) => {
   // Create a new post.
   router.post("/", controller.create);
 
+  // Select a single post from user id.
+  router.get("/user/:id", controller.byUser);
+
   // Add routes to server.
   app.use("/api/posts", router);
 };

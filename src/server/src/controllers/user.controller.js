@@ -17,24 +17,33 @@ exports.one = async (req, res) => {
 
 // Select one user from the database if username and password are a match.
 exports.login = async (req, res) => {
-  const user = await db.user.findByPk(req.query.username);
+  const users = await db.user.findAll({
+    where: {
+      email: req.query.email,
+    }
+  });
 
-  if(user === null || await argon2.verify(user.password_hash, req.query.password) === false)
-    // Login failed.
-    res.json(null);
-  else
-    res.json(user);
+  if (users.length === 0) {
+    res.status(400).json({ message: "User not found" });
+  } else {
+    const user = users[0];
+
+    if (await argon2.verify(user.password_hash, req.query.password) === false)
+      // Login failed.
+      res.json(null);
+    else
+      res.json(user);
+  }
 };
 
 // Create a user in the database.
 exports.create = async (req, res) => {
   const hash = await argon2.hash(req.body.password, { type: argon2.argon2id });
-  
+
   const user = await db.user.create({
-    username: req.body.username,
+    email: req.body.email,
+    name: req.body.name,
     password_hash: hash,
-    first_name: req.body.firstname,
-    last_name: req.body.lastname
   });
 
   res.json(user);
