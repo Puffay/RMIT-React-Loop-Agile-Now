@@ -20,7 +20,7 @@ const Home = () => {
             <Typography component='h1' variant='h7' align='center'>
                 Welcome to Loop Agile Now
             </Typography>
-            <Container>
+            <Container sx={{ mb: 2 }}>
                 <Typography component='h1' variant='h7' align='left' fontSize={24}>
                     Post from other users
                 </Typography>

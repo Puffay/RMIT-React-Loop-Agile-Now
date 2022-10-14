@@ -6,7 +6,18 @@ exports.all = async (req, res) => {
     include: [
       {
         model: db.user,
-        attributes: ["id", "name"]
+        attributes: ["id", "name", "image"]
+      },
+      {
+        model: db.reply,
+        attributes: ["id", "text", "createdAt"],
+        include: [
+          {
+            model: db.user,
+            attributes: ["id", "name", "image"]
+          }
+        ],
+        order: [["createdAt", "DESC"]]
       }
     ],
     order: [["createdAt", "DESC"]]

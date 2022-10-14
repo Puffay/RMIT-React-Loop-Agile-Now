@@ -1,9 +1,9 @@
 import { Avatar, Button, Container, Grid, Paper, Stack, Typography } from "@mui/material";
 import React from "react";
 import { userContext } from "../App";
-import { getUserName } from "../data/database";
 import { deepPurple } from '@mui/material/colors';
 import ReactMarkdown from 'react-markdown';
+import Reply from "./Reply";
 
 // Forum page componenet for the forum page that shows the forum posts
 
@@ -11,6 +11,7 @@ const ForumList = (props) => {
     const forums = props.forums;
     const handleDelete = props.handleDelete;
     const handleEdit = props.handleEdit;
+    const handleReply = props.handleReply;
     const [user] = React.useContext(userContext);
 
     return (
@@ -33,20 +34,23 @@ const ForumList = (props) => {
                                 </Stack>
                             </Grid>
                             <Grid item xs={4} >
-                                {user === null || (!(props.canDelete && (user.id === forum.author)) ?? false) ? (
+                                {user === null || (!(props.canDelete && (user.id === forum.user.id)) ?? false) ? (
                                     <div></div>)
                                     : (
                                         <Button onClick={() => handleDelete(forum.id)} sx={{ ml: '220px' }} >
                                             Delete Post
                                         </Button>)
                                 }
-                                {user === null || (!(props.canEdit && (user.id === forum.author)) ?? false) ? (
+                                {user === null || (!(props.canEdit && (user.id === forum.user.id)) ?? false) ? (
                                     <div></div>)
                                     : (
                                         <Button onClick={() => handleEdit(forum.id)} sx={{ ml: '220px' }} >
                                             Edit Post
                                         </Button>)
                                 }
+                                <Button onClick={() => handleReply(forum.post_id)} sx={{ ml: '216px' }} >
+                                    Reply
+                                </Button>
                             </Grid>
                         </Grid>
                         <Container>
@@ -65,10 +69,13 @@ const ForumList = (props) => {
                             </div>
                         ) : (<div></div>)}
                     </Paper>
+                    {forum.replies.map((reply) => (
+                        <Reply key={reply.post_id} reply={reply} />
+                    ))}
                 </Container>
             ))}
         </Container>
-    );
+    )
 }
 
 

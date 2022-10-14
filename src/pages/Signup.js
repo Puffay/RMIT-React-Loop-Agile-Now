@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Container, Box, TextField, Button, Paper, Typography } from '@mui/material';
-import { addUser, existUser, getUser, verifyUser } from '../data/database';
 import { useNavigate } from 'react-router-dom';
 import { userContext } from '../App';
+import { createUser } from '../data/repository';
 
 // Page for user to sign up for an account
 
@@ -20,18 +20,16 @@ const Signup = () => {
 
         if (email === '' || password === '' || name === '') { // Check if all fields are filled out
             setError('Please fill out all fields');
-        } else if (existUser(email)) { //should check to see if user already exists
-            setError('Account already exist');
         } else if (password.length < 8) { // Check if password is strong
             setError('Password should be at least 8 characters');
         } else {
-            addUser(email, name, password);
-            verifyUser(email, password);
-            setUser(getUser()); // when user registers they are logged in
-            navigate('/signupverify');
+            createUser({ email, password, name }).then((user) => {
+                setUser(user);
+                navigate('/profile');
+            }).catch((err) => {
+                setError(err.message);
+            });
         }
-        
-        console.log('Signup');
     }
 
     function onChangeEmail(e) {

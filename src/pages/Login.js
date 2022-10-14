@@ -19,7 +19,8 @@ const Login = () => {
         const password = data.get('password');
 
         verifyUser(email, password).then((res) => {
-            setUser(res.data);
+            setUser(res);
+            localStorage.setItem('user', JSON.stringify(res));
             navigate('/profile');
         }).catch((err) => {
             setError('Invalid email or password');

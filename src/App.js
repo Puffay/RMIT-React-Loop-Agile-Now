@@ -5,6 +5,7 @@ import SignUp from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Forum from './pages/Forum';
+import Reply from './pages/Reply';
 import Signupverify from './pages/Signupverify';
 import Footer from './Footer';
 import Contact from './pages/Contact';
@@ -17,7 +18,6 @@ export const userContext = createContext();
 
 function App() {
   const userState = useState(JSON.parse(localStorage.getItem("user")));
-  initUsers();
   return (
     <Box>
       <CssBaseline />
@@ -31,6 +31,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/forum" element={<Forum />} />
+              <Route path="/forum/:id" element={<Reply />} />
               <Route path="/signupverify" element={<Signupverify />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>

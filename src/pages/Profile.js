@@ -5,8 +5,7 @@ import { Button, Stack, Typography, Dialog, DialogActions, DialogContent, Dialog
 import { deepPurple } from '@mui/material/colors';
 import styled from '@mui/system/styled';
 import { userContext } from '../App';
-import { deleteUser } from '../data/database';
-import { editUser } from '../data/database';
+import { editUser, deleteUser } from '../data/repository';
 import { useNavigate } from 'react-router-dom';
 
 // Profile Page for editing profile and deleting account
@@ -15,6 +14,7 @@ const Profile = () => {
     const navigate = useNavigate();
     const [nameError, setNameError] = useState(false);
     const [emailError, setEmailError] = useState(false);
+    const [working, setWorking] = useState(false);
 
     const handleSubmit = (e) => {
         const data = new FormData(e.currentTarget);
@@ -31,9 +31,15 @@ const Profile = () => {
         }
 
         if (name && email) {
-            console.log(name, email);
-            setUser(editUser(name, email));
-            navigate('/')
+            console.log(e);
+            setWorking(true);
+            editUser(email, name, user.id).then((user) => {
+                setUser(user);
+                setWorking(false);
+            }).catch((error) => {
+                console.log(error);
+                setWorking(false);
+            });
         }
     }
 
@@ -115,7 +121,7 @@ const Profile = () => {
                                 name="dateofjoining"
                                 label="Date of Joining"
                                 disabled
-                                defaultValue={new Date(user.date).toLocaleDateString("en-AU")}
+                                defaultValue={new Date(user.createdAt).toLocaleDateString("en-AU")}
                             />
 
                             <Dialog
@@ -143,7 +149,7 @@ const Profile = () => {
                             </Dialog>
                         </Box>
                         <Box alignItems={'center'} justifyContent={'space-between'}>
-                            <Button variant="contained" color="primary" type="submit" onSubmit={handleSubmit} sx={{ mr: '20px' }}>
+                            <Button variant="contained" color="primary" type="submit" onSubmit={handleSubmit} sx={{ mr: '20px' }} enabled={working}>
                                 Save
                             </Button>
                             <Button variant="contained" color="primary" onClick={handleClickOpen}>

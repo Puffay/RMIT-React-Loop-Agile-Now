@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import ForumList from '../component/ForumList';
 import { Avatar, Box, Container, Button, Icon, IconButton, Stack, TextField, Typography, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { userContext } from '../App';
@@ -9,7 +10,7 @@ import { getPosts, createPost } from '../data/repository';
 // Forum page for user to post and view other users posts. can also edit and delete own posts
 
 const Forum = () => {
-
+    const navigate = useNavigate();
     const [user] = useContext(userContext);
     const [error, setError] = useState('none');
     const [image, setImage] = useState(null);
@@ -17,6 +18,10 @@ const Forum = () => {
     const [editDialogOpen, setEditDialogOpen] = useState(false);
     const [editID, setEditID] = useState(null);
     const [editBody, setEditBody] = useState('');
+
+    if (user === null) {
+        navigate('/login');
+    }
 
     useEffect(() => {
         getPosts().then((posts) => {
@@ -74,6 +79,12 @@ const Forum = () => {
         setEditDialogOpen(true);
     }
 
+    // Reply Post
+    const handleReply = (id) => {
+        navigate(`/forum/${id}`);
+        
+    }
+
     // Close Edit post
     const handleEditClose = () => {
         setEditDialogOpen(false);
@@ -129,7 +140,7 @@ const Forum = () => {
                     Post from other users
                 </Typography>
             </Container>
-            <ForumList forums={forums} handleDelete={handleDelete} handleEdit={handleEdit} canDelete canEdit />
+            <ForumList forums={forums} handleDelete={handleDelete} handleEdit={handleEdit} handleReply={handleReply} canDelete canEdit />
             <Dialog open={editDialogOpen} onClose={handleEditClose}>
                 <Box component='form' onSubmit={handleEditComplete}>
                     <DialogTitle>Edit Forum</DialogTitle>

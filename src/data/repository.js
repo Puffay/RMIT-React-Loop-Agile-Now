@@ -9,13 +9,7 @@ const USER_KEY = "user";
 // --- User ---------------------------------------------------------------------------------------
 async function verifyUser(email, password) {
   const response = await axios.get(API_HOST + "/api/users/login", { params: { email, password } });
-  const user = response.data;
-  
-  // NOTE: In this example the login is also persistent as it is stored in local storage.
-  if(user !== null)
-    setUser(user);
-
-  return user;
+  return response.data;
 }
 
 async function findUser(id) {
@@ -30,6 +24,16 @@ async function createUser(user) {
   return response.data;
 }
 
+async function editUser(email, name, id) {
+  const response = await axios.put(API_HOST + `/api/users/${id}`, { email, name });
+
+  return response.data;
+}
+
+async function deleteUser(id) {
+  return await axios.delete(API_HOST + `/api/users/${id}`);
+};
+
 // --- Post ---------------------------------------------------------------------------------------
 async function getPosts() {
   const response = await axios.get(API_HOST + "/api/posts");
@@ -39,6 +43,13 @@ async function getPosts() {
 
 async function createPost(post) {
   const response = await axios.post(API_HOST + "/api/posts", post);
+
+  return response.data;
+}
+
+async function createReply(post_id, text) {
+  const id = getUser().id;
+  const response = await axios.post(API_HOST + `/api/replies/`, { id, post_id, text });
 
   return response.data;
 }
@@ -62,6 +73,9 @@ export {
   createUser,
   getPosts, 
   createPost,
-  getUser, 
+  createReply,
+  getUser,
+  editUser,
+  deleteUser,
   removeUser
 }
