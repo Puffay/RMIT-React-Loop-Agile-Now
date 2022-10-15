@@ -2,6 +2,7 @@ import { Avatar, Button, Container, Grid, Paper, Stack, Typography } from "@mui/
 import React from "react";
 import { userContext } from "../App";
 import { deepPurple } from '@mui/material/colors';
+import MuiMarkdown from "mui-markdown";
 import Reply from "./Reply";
 
 // Forum page componenet for the forum page that shows the forum posts
@@ -53,7 +54,7 @@ const ForumList = (props) => {
                             </Grid>
                         </Grid>
                         <Container>
-                            {forum.text}
+                            <MuiMarkdown>{forum.text}</MuiMarkdown>
                         </Container>
                         {forum.image ? (
                             <div>

@@ -2,9 +2,9 @@ import { Avatar, Button, Container, Grid, Paper, Stack, Typography } from "@mui/
 import React from "react";
 import { userContext } from "../App";
 import { deepPurple } from '@mui/material/colors';
-import ReactMarkdown from 'react-markdown';
+import MuiMarkdown from "mui-markdown";
 
-// Forum page componenet for the forum page that shows the forum posts
+// For Reply
 
 const Reply = (props) => {
     const reply = props.reply;
@@ -28,7 +28,7 @@ const Reply = (props) => {
                     </Grid>
                 </Grid>
                 <Container>
-                    <ReactMarkdown children={reply.text}></ReactMarkdown>
+                    <MuiMarkdown>{reply.text}</MuiMarkdown>
                 </Container>
             </Paper>
         </Container>
