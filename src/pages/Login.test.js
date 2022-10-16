@@ -79,6 +79,72 @@ describe("Login", () => {
       // Check if values are correct
       expect(currentUser).toEqual(undefined);
     });
+
+    // check if login button is fail when email is empty
+    it("Should login fail when email is empty", async () => {
+      // Mocck axios
+      axios.get.mockClear();
+      axios.get.mockRejectedValueOnce();
+
+      // Get input fields
+      let emailInput = screen.getByLabelText("Email");
+      let passwordInput = screen.getByLabelText("Password");
+      let loginButton = screen.getByRole("button", { name: "Login" });
+
+      // Simulate input
+      await act(async () => {
+        fireEvent.change(emailInput, { target: { value: "" } });
+        fireEvent.change(passwordInput, { target: { value: "123456" } });
+        fireEvent.click(loginButton);
+      });
+
+      // Check if values are correct
+      expect(currentUser).toEqual(undefined);
+    });
+
+    // check if login button is fail when password is empty
+    it("Should login fail when password is empty", async () => {
+      // Mocck axios
+      axios.get.mockClear();
+      axios.get.mockRejectedValueOnce();
+
+      // Get input fields
+      let emailInput = screen.getByLabelText("Email");
+      let passwordInput = screen.getByLabelText("Password");
+      let loginButton = screen.getByRole("button", { name: "Login" });
+
+      // Simulate input
+      await act(async () => {
+        fireEvent.change(emailInput, { target: { value: expectedUser.email } });
+        fireEvent.change(passwordInput, { target: { value: "" } });
+        fireEvent.click(loginButton);
+      });
+
+      // Check if values are correct
+      expect(currentUser).toEqual(undefined);
+    });
+
+    // check if login button fail when email and password is empty
+    it("Should login fail when email and password is empty", async () => {
+      // Mocck axios
+      axios.get.mockClear();
+      axios.get.mockRejectedValueOnce();
+
+      // Get input fields
+      let emailInput = screen.getByLabelText("Email");
+      let passwordInput = screen.getByLabelText("Password");
+      let loginButton = screen.getByRole("button", { name: "Login" });
+
+      // Simulate input
+      await act(async () => {
+        fireEvent.change(emailInput, { target: { value: "" } });
+        fireEvent.change(passwordInput, { target: { value: "" } });
+        fireEvent.click(loginButton);
+      });
+
+      // Check if values are correct
+      expect(currentUser).toEqual(undefined);
+    });
 });
 
 // test('renders login page', () => {
